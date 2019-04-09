@@ -172,16 +172,16 @@
                             </div>
                             <div class='block text-small'>
                             <span class='tooltipped' data-position='top'><span
-                                    class='strong'>{{ stat.successes }}</span> test(s) passed</span>
+                                    class='strong'>{{ stat.testcases.success }}</span> test(s) passed</span>
                                 <span class='tooltipped' data-position='top'><span
-                                        class='strong'>{{ stat.failures }}</span> test(s) failed</span>
+                                        class='strong'>{{ stat.testcases.failures }}</span> test(s) failed</span>
                             </div>
                             <div class='block text-small'>
                             <span class='strong tooltipped' data-position='top'
-                            >{{ stat.errors }}</span>
+                            >{{ stat.testcases.errors }}</span>
                                 test(s) errored
                                 <span class='strong tooltipped' data-position='top'
-                                >{{ stat.skipped }}</span>
+                                >{{ stat.testcases.skipped }}</span>
                                 test(s) skipped
                             </div>
                         </div>
@@ -689,47 +689,77 @@
     <!-- testrunner-logs view -->
     <!-- container -->
 </div>
-<script>
-    var test_suite_success = 0;
-    {%for test_suite_summary in details %}
-        {% if test_suite_summary.success == True %}
-            test_suite_success = test_suite_success + 1;
-        {% endif %}
+<!--<script>-->
+    <!--var test_suite_success = 0;-->
+    <!--{%for test_suite_summary in details %}-->
+        <!--{% if test_suite_summary.success == True %}-->
+            <!--test_suite_success = test_suite_success + 1;-->
+        <!--{% endif %}-->
 
-    {% endfor %}
+    <!--{% endfor %}-->
 
-    var statusGroup = {
-        passParent: {{ stat.successes }},
-        failParent: {{ stat.failures }},
-        fatalParent: 0,
-        errorParent: {{ stat.errors }},
-        warningParent: 0,
-        skipParent: {{ stat.skipped }},
-        exceptionsParent: 0,
+    <!--var statusGroup = {-->
+        <!--passParent: {{ stat.testcases.success }},-->
+        <!--failParent: {{ stat.testcases.failures }},-->
+        <!--fatalParent: 0,-->
+        <!--errorParent: {{ stat.testcases.errors }},-->
+        <!--warningParent: 0,-->
+        <!--skipParent: {{ stat.testcases.skipped }},-->
+        <!--exceptionsParent: 0,-->
 
-        passChild: test_suite_success,
-        failChild: {{ details|length }} -test_suite_success,
-        fatalChild: 0,
-        errorChild: 0,
-        warningChild: 0,
-        skipChild: 0,
-        infoChild: 0,
-        exceptionsChild: 0,
+        <!--passChild: test_suite_success,-->
+        <!--failChild: {{ details|length }} -test_suite_success,-->
+        <!--fatalChild: 0,-->
+        <!--errorChild: 0,-->
+        <!--warningChild: 0,-->
+        <!--skipChild: 0,-->
+        <!--infoChild: 0,-->
+        <!--exceptionsChild: 0,-->
 
-        passGrandChild: 0,
-        failGrandChild: 0,
-        fatalGrandChild: 0,
-        errorGrandChild: 0,
-        warningGrandChild: 0,
-        skipGrandChild: 0,
-        infoGrandChild: 0,
-        exceptionsGrandChild: 0,
-    };
+        <!--passGrandChild: 0,-->
+        <!--failGrandChild: 0,-->
+        <!--fatalGrandChild: 0,-->
+        <!--errorGrandChild: 0,-->
+        <!--warningGrandChild: 0,-->
+        <!--skipGrandChild: 0,-->
+        <!--infoGrandChild: 0,-->
+        <!--exceptionsGrandChild: 0,-->
+    <!--};-->
 
-    document.getElementById('pass_suites').innerHTML = "<span class='strong'>" + test_suite_success + "</span> suite(s) passed";//找到id为'myId'的标签内插入html变量的值
-    document.getElementById('fail_suites').innerText = {{ details|length }} -test_suite_success;//找到id为'myId'的标签替换它的内容为html的值
+    <!--document.getElementById('pass_suites').innerHTML = "<span class='strong'>" + test_suite_success + "</span> suite(s) passed";//找到id为'myId'的标签内插入html变量的值-->
+    <!--document.getElementById('fail_suites').innerText = {{ details|length }} -test_suite_success;//找到id为'myId'的标签替换它的内容为html的值-->
 
-</script>
+<!--</script>-->
+
+    	<script>
+			var statusGroup = {
+				passParent: {{ stat.testcases.success }},
+				failParent: {{stat.teststeps.failures}},
+				fatalParent: 0,
+				errorParent: {{ stat.teststeps.errors }},
+				warningParent: 0,
+				skipParent: {{stat.teststeps.skipped}},
+				exceptionsParent: 1,
+
+				passChild: 20,
+				failChild: 0,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 0,
+				infoChild: 0,
+				exceptionsChild: 109,
+
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
 
 <script src='http://extentreports.com/resx/dist/js/extent.js' type='text/javascript'></script>
 

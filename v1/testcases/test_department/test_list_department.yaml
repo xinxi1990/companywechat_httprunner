@@ -24,6 +24,8 @@
     request:
       method:  GET
       url:  $get_list_api$access_token
+    setup_hooks:
+        - ${setup_hook_prepare_kwargs($request)}
     teardown_hooks:
         - ${teardown_hook_write_file($response)}
     validate:

@@ -1,3 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
 import json
 import os
 import random
@@ -142,6 +146,23 @@ def get_name_id():
         {"name": "p_2", "id": "222"},
         {"name": "p_3", "id": "333"},
     ]
+
+
+
+def setup_hook_prepare_kwargs(request):
+    '''
+    set prepare_kwargs
+    :param request:
+    :return:
+    '''
+    if request["method"] == "POST":
+        content_type = request.get("headers", {}).get("content-type")
+        if content_type and "data" in request:
+            # if request content-type is application/json, request data should be dumped
+            if content_type.startswith("application/json") and isinstance(request["data"], (dict, list)):
+                request["data"] = json.dumps(request["data"])
+            if isinstance(request["data"], str):
+                request["data"] = request["data"].encode('utf-8')
 
 
 def teardown_hook_write_file(response):

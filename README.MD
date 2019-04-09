@@ -59,12 +59,23 @@ eg:
 
 ## 硬编码
 
-
 ## csv
 
-## debugtalk  
+## debugtalk
   
-  
+ 
+# hook函数
+
+## setup_hooks
+
+## teardown_hooks
+
+
+# 断言
+
+## 
+
+
 # 执行
 ```
 hrun v1/testsuites/

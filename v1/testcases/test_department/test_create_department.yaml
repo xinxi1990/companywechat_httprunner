@@ -35,3 +35,20 @@
       - eq: ["status_code", 200]
       - eq: ["content.errcode", 0]
 
+
+- test:
+    name: create_department_parameter_csv
+    request:
+      headers:
+          Content-Type: application/json
+      method:  POST
+      url:  $create_api$access_token
+      json:
+          name: $name
+          parentid: 1
+          order: 1
+          id: $id
+  validate:
+      - eq: ["status_code", 200]
+      - eq: ["content.errcode", 0]
+

@@ -1,0 +1,20 @@
+- config:
+      name: test_department
+      request:
+          base_url: ''
+          verify: false
+      headers:
+          User-Agent: 'Apache-HttpClient/4.5.3 (Java/1.8.0_161)'
+
+
+- test:
+    name: create_department
+    request:
+      headers:
+          Content-Type: application/json
+      method:  GET
+      url:  http://www.baidu.com/?department_id=$department_id
+    validate:
+        - eq: ["status_code", 200]
+
+

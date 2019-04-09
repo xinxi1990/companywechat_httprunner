@@ -2,13 +2,30 @@ config:
     name: test_suite
 
 testcases:
-    testcase_department_1_name:
-        testcase: /testcases/test_department/test_create_department.yaml
-        parameters:
-            name-id:
-                - ["user1", "111111"]
-                - ["user2", "222222"]
-                - ["user3", "333333"]
+#    testcase_department_1_name:
+#        testcase: /testcases/test_department/test_create_department.yaml
+#        parameters:
+#            name-id:
+#                - ["user1", "111111"]
+#                - ["user2", "222222"]
+#                - ["user3", "333333"]
+#    testcase_department_2_name:
+#        testcase: /testcases/test_department/test_list_department.yaml
+#        parameters:
+#    testcase_department_3_name:
+#      testcase: /testcases/test_department/test_create_department_csv.yaml
+#      parameters:
+#          name-id: ${P(account.csv)}
+#    testcase_department_4_name:
+#      testcase: /testcases/test_department/test_create_department_debugtalk.yaml
+#      parameters:
+#          name-id: ${get_name_id()}
+
+
     testcase_department_2_name:
         testcase: /testcases/test_department/test_list_department.yaml
         parameters:
+    testcase_department_5_name:
+      testcase: /testcases/test_department/test_create_null.yaml
+      parameters:
+          department_id: ${P(file.csv)}

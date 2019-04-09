@@ -4,12 +4,23 @@ import random
 import string
 import time
 import configparser
+import csv
 
 # from testcases.api_server import HTTPBIN_SERVER, SECRET_KEY, gen_md5, get_sign
+
+PATH = lambda p: os.path.abspath(
+    os.path.join(os.path.dirname(__file__), p)
+)
+
+auto_cfg_path = PATH("../v1/config/auto.cfg")
+file_path = PATH("../v1/file.csv")
 
 
 BASE_URL = "http://127.login.login.1:5000"
 # UserName = os.environ['UserName']
+
+
+
 
 demo_default_request = {
     "base_url": "$BASE_URL",
@@ -103,12 +114,6 @@ def alter_response_error(response):
     not_defined_variable
 
 
-PATH = lambda p: os.path.abspath(
-    os.path.join(os.path.dirname(__file__), p)
-)
-
-auto_cfg_path = PATH("../v1/config/auto.cfg")
-
 def read_config(cfg_file):
     cfg = configparser.ConfigParser()
     cfg.read(cfg_file)
@@ -125,6 +130,33 @@ def get_cord_id():
 
 def get_secure():
     return l_c.get('contact_para', 'secure')
+
+def get_name_id():
+    print(get_name_id)
+    '''
+    get name and id parameters
+    :return:
+    '''
+    return [
+        {"name": "p_1","id": "111"},
+        {"name": "p_2", "id": "222"},
+        {"name": "p_3", "id": "333"},
+    ]
+
+
+def teardown_hook_write_file(response):
+    """ write some str after request
+    """
+    print("teardown_hook_write_file")
+    if response.status_code == 200:
+        department_id_list = []
+        for index in response.json['department']:
+            department_id_list.append([(index)['id']])
+        with open(file_path, "w") as csvfile:
+            writer = csv.writer(csvfile)
+            writer.writerow(["department_id"])
+            writer.writerows(department_id_list)
+
 
 
 

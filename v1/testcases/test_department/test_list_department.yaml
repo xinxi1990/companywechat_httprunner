@@ -24,6 +24,8 @@
     request:
       method:  GET
       url:  $get_list_api$access_token
+    teardown_hooks:
+        - ${teardown_hook_write_file($response)}
     validate:
         - eq: ["status_code", 200]
         - eq: ["content.errcode", 0]

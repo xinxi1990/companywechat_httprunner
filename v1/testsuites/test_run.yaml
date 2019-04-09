@@ -1,0 +1,14 @@
+config:
+    name: test_suite
+
+testcases:
+    testcase_department_1_name:
+        testcase: /testcases/test_department/test_create_department.yaml
+        parameters:
+            name-id:
+                - ["user1", "111111"]
+                - ["user2", "222222"]
+                - ["user3", "333333"]
+    testcase_department_2_name:
+        testcase: /testcases/test_department/test_list_department.yaml
+        parameters:

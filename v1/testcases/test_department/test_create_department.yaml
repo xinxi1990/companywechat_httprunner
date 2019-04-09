@@ -1,0 +1,37 @@
+- config:
+      name: test_department
+      request:
+          base_url: ''
+          verify: false
+      headers:
+          User-Agent: 'Apache-HttpClient/4.5.3 (Java/1.8.0_161)'
+      variables:
+          - get_token_api: ${get_token_url()}
+          - cord_id: ${get_cord_id()}
+          - corpsecret: ${get_secure()}
+          - get_list_api: "https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token="
+          - create_api: "https://qyapi.weixin.qq.com/cgi-bin/department/create?access_token="
+          - del_api: "https://qyapi.weixin.qq.com/cgi-bin/department/delete?access_token="
+
+- test:
+      name: get token
+      api: get_login_token($get_token_api,$cord_id,$corpsecret)
+      extract:
+          - access_token: content.access_token
+
+- test:
+    name: create_department
+    request:
+      headers:
+          Content-Type: application/json
+      method:  POST
+      url:  $create_api$access_token
+      json:
+          name: $name
+          parentid: 1
+          order: 1
+          id: $id
+  validate:
+      - eq: ["status_code", 200]
+      - eq: ["content.errcode", 0]
+

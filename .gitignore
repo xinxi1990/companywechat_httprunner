@@ -1,0 +1,12 @@
+*.sql
+*.pyc
+*.log
+.idea/*
+screenshot/*
+.pytest_cache/*
+*_截图.png
+data/*
+token.log
+failures
+reports/*
+v1/config/*
